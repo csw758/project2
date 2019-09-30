@@ -27,13 +27,6 @@ public class GameCanvas extends Canvas {
 				repaint();
 			}
 
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				super.mouseClicked(e);
-//				hand.move(e.getX(), e.getY());
-//				System.out.println(e.getX() + ", " + e.getY());
-//			}
 		});
 		addMouseListener(new MouseAdapter() {
 
