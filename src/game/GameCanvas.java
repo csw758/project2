@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class GameCanvas extends Canvas implements MouseListener, MouseMotionListener {
+public class GameCanvas extends Canvas {
 	BackGround bg;
 	Hand hand;
 
@@ -17,15 +17,16 @@ public class GameCanvas extends Canvas implements MouseListener, MouseMotionList
 		bg = new BackGround();
 		hand = new Hand();
 
-		addMouseListener(new MouseAdapter() {
+		addMouseMotionListener(new MouseAdapter() {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
-				super.mouseMoved(e);
 				hand.move(e.getX(), e.getY());
-				System.out.println(e.getX() + ", " + e.getY());
+//				System.out.println(e.getX() + ", " + e.getY());
+				repaint();
 			}
+
 //			@Override
 //			public void mouseClicked(MouseEvent e) {
 //				// TODO Auto-generated method stub
@@ -34,13 +35,23 @@ public class GameCanvas extends Canvas implements MouseListener, MouseMotionList
 //				System.out.println(e.getX() + ", " + e.getY());
 //			}
 		});
+		addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				hand.move(e.getX(), e.getY());
+				System.out.println(e.getX() + ", " + e.getY());
+				// kill bug
+			}
+		});
 
 		new Thread(() -> {
 			while (true) {
 				try {
 
 					hand.update();
-					Thread.sleep(1); // 약 60프레임
+					Thread.sleep(1); // �빟 60�봽�젅�엫
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -65,45 +76,6 @@ public class GameCanvas extends Canvas implements MouseListener, MouseMotionList
 		bg.draw(bufGraphic, this);
 		hand.draw(bufGraphic, this);
 		g.drawImage(bufImage, 0, 0, this);
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-		repaint();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-//		hand.setPressed(true);
-//		repaint();
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-//		hand.setPressed(false);
-//		repaint();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		paint();
-
 	}
 
 }
