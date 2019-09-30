@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+//내가 한번 바꿔볼게~!~!~!~!
 public class GameCanvas extends Canvas {
 	BackGround bg;
 	Hand hand;
