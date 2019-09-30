@@ -7,28 +7,38 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class GameCanvas extends Canvas implements MouseListener {
+public class GameCanvas extends Canvas implements MouseListener, MouseMotionListener {
 	BackGround bg;
 	Hand hand;
 
 	public GameCanvas() {
 		bg = new BackGround();
 		hand = new Hand();
+
 		addMouseListener(new MouseAdapter() {
+
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
-				super.mouseClicked(e);
+				super.mouseMoved(e);
 				hand.move(e.getX(), e.getY());
 				System.out.println(e.getX() + ", " + e.getY());
 			}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				super.mouseClicked(e);
+//				hand.move(e.getX(), e.getY());
+//				System.out.println(e.getX() + ", " + e.getY());
+//			}
 		});
 
 		new Thread(() -> {
 			while (true) {
 				try {
-					
+
 					hand.update();
 					Thread.sleep(1); // 약 60프레임
 				} catch (InterruptedException e) {
@@ -56,15 +66,10 @@ public class GameCanvas extends Canvas implements MouseListener {
 		hand.draw(bufGraphic, this);
 		g.drawImage(bufImage, 0, 0, this);
 	}
-	
-	@Override
-	public boolean mouseMove(Event evt, int x, int y) {
-		return mouseMove(evt, x, y);
-	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-	
+
 		repaint();
 	}
 
@@ -87,4 +92,18 @@ public class GameCanvas extends Canvas implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		paint();
+
+	}
+
 }
