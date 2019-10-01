@@ -13,6 +13,7 @@ public class GameCanvas extends Canvas {
 	List<Bug[]> bugs;
 	Bug[] bug;
 	Hand hand;
+	Bug bug1, bug2;
 
 	public GameCanvas() {
 		bg = new BackGround();
@@ -22,6 +23,8 @@ public class GameCanvas extends Canvas {
 			bug[i] = new Bug();
 		}
 		hand = new Hand();
+		bug1 = new Bug(200, 20);
+		bug2 = new Bug(600, 700);
 
 		addMouseMotionListener(new MouseAdapter() {
 			@Override
@@ -89,7 +92,8 @@ public class GameCanvas extends Canvas {
 			if (bug[i] != null)
 				bug[i].draw(bufGraphic, this);
 		}
-
+		bug1.draw(bufGraphic, this);
+		bug2.draw(bufGraphic, this);
 		g.drawImage(bufImage, 0, 0, this);
 	}
 
@@ -103,6 +107,8 @@ public class GameCanvas extends Canvas {
 							if (bug[i].isAlive())
 								bug[i].move();
 					}
+					bug1.move();
+					bug2.move();
 					Thread.sleep(16);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

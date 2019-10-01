@@ -11,6 +11,7 @@ public class Bug {
 	private int w, h;
 	private int hp;
 	private int vx, vy;
+	private int startX, startY;
 
 	private Random random;
 	private boolean isAlive;
@@ -66,9 +67,19 @@ public class Bug {
 		x = random.nextInt(300) + 300;
 		y = 20;
 		w = h = 13;
+		startX = x;
+		startY = y;
 		setHp(1);
 		img = tk.createImage("res/bullet.png");
 		isAlive = true;
+	}
+
+	public Bug(int x, int y) {
+		this();
+		this.x = x;
+		this.y = y;
+		startX = x;
+		startY = y;
 	}
 
 	public void draw(Graphics g, GameCanvas gamecanvas) {
@@ -77,12 +88,17 @@ public class Bug {
 	}
 
 	public void move() {
-		float dx = x - 230;
-		float dy = y - 700;
+		float dx = (x - 230) / 10;
+		float dy = (y - 700) / 10;
 		float dis = (float) Math.sqrt(dx * dx + dy * dy);
 
-		vx = (int) (w / dis * random.nextInt(177));
-		vy = (int) (h / dis * random.nextInt(157));
+		vx = (int) (w / dis * random.nextInt(7));
+		vy = (int) (h / dis * random.nextInt(7));
+
+		if (startX <= 230)
+			vx = random.nextInt(7);
+		else if (startY >= 600)
+			vy = random.nextInt(7);
 
 		x += -vx;
 		y += vy;
