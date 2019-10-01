@@ -13,7 +13,7 @@ public class GameCanvas extends Canvas {
 	List<Bug[]> bugs;
 	Bug[] bug;
 	Hand hand;
-	Bug bug1, bug2;
+	Bug bug1, bug2, bug3;
 
 	public GameCanvas() {
 		bg = new BackGround();
@@ -25,6 +25,7 @@ public class GameCanvas extends Canvas {
 		hand = new Hand();
 		bug1 = new Bug(200, 20);
 		bug2 = new Bug(600, 700);
+		bug3 = new Bug(700, 40);
 
 		addMouseMotionListener(new MouseAdapter() {
 			@Override
@@ -51,7 +52,7 @@ public class GameCanvas extends Canvas {
 			public void mousePressed(MouseEvent e) {
 				hand.setPressed(true);
 				hand.move(e.getX(), e.getY());
-				System.out.println("attack");
+				System.out.println(e.getX() + " " + e.getY());
 				// 벌레에서 자리 판정
 				for (int i = 0; i < bug.length; i++) {
 					if (bug[i] != null)
@@ -88,12 +89,13 @@ public class GameCanvas extends Canvas {
 
 		bg.draw(bufGraphic, this);
 		hand.draw(bufGraphic, this);
-		for (int i = 0; i < bug.length; i++) {
-			if (bug[i] != null)
-				bug[i].draw(bufGraphic, this);
-		}
+//		for (int i = 0; i < bug.length; i++) {
+//			if (bug[i] != null)
+//				bug[i].draw(bufGraphic, this);
+//		}
 		bug1.draw(bufGraphic, this);
 		bug2.draw(bufGraphic, this);
+		bug3.draw(bufGraphic, this);
 		g.drawImage(bufImage, 0, 0, this);
 	}
 
@@ -109,6 +111,7 @@ public class GameCanvas extends Canvas {
 					}
 					bug1.move();
 					bug2.move();
+					bug3.move();
 					Thread.sleep(16);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

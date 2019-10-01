@@ -10,8 +10,7 @@ public class Bug {
 	private int x, y;
 	private int w, h;
 	private int hp;
-	private int vx, vy;
-	private int startX, startY;
+	private float tempX, tempY;
 
 	private Random random;
 	private boolean isAlive;
@@ -64,11 +63,11 @@ public class Bug {
 
 	public Bug() {
 		random = new Random();
-		x = random.nextInt(300) + 300;
-		y = 20;
+		x = random.nextInt(800);
+		y = -20;
 		w = h = 13;
-		startX = x;
-		startY = y;
+		tempX = x;
+		tempY = y;
 		setHp(1);
 		img = tk.createImage("res/bullet.png");
 		isAlive = true;
@@ -78,8 +77,8 @@ public class Bug {
 		this();
 		this.x = x;
 		this.y = y;
-		startX = x;
-		startY = y;
+		tempX = x;
+		tempY = y;
 	}
 
 	public void draw(Graphics g, GameCanvas gamecanvas) {
@@ -88,25 +87,31 @@ public class Bug {
 	}
 
 	public void move() {
-		float dx = (x - 230) / 10;
-		float dy = (y - 700) / 10;
+		// v(dx,dy)
+		// 침대 중앙 : 114,690
+		// 침대 왼쪽 아래 : 30,804
+		// +,-
+		float dx = (x - 30);
+		float dy = (y - 804);
+		// 벡터의 길이.
 		float dis = (float) Math.sqrt(dx * dx + dy * dy);
 
-		vx = (int) (w / dis * random.nextInt(7));
-		vy = (int) (h / dis * random.nextInt(7));
+		// 정규화 = 단위벡터 생성.
+		tempX = dx / dis * random.nextFloat() * 17;
+		tempY = dy / dis * random.nextFloat() * 17;
 
-		if (startX <= 230)
-			vx = random.nextInt(7);
-		else if (startY >= 600)
-			vy = random.nextInt(7);
-
-		x += -vx;
-		y += vy;
+		x += (int) tempX * (-1);
+		y += (int) tempY * (-1);
+		
+		/*
+		 * 벌레의 움직임이 좀 더 커야할것 같다.
+		 * 벌레가 하나씩 출현하게 
+		 * */
 	}
 
 	public void die() {
-		vx = 0;
-		vy = 0;
+		tempX = 0;
+		tempY = 0;
 		isAlive = false;
 		img = tk.getImage("res/missile.png");
 	}
