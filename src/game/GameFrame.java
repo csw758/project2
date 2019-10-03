@@ -13,7 +13,6 @@ public class GameFrame extends Frame {
 
 		gamecanvas = new GameCanvas();
 		add(gamecanvas);
-		((GameCanvas) gamecanvas).start();
 		gamecanvas.setFocusable(true);
 		gamecanvas.requestFocus();
 		setVisible(true);

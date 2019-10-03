@@ -7,18 +7,27 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class Bug {
-	private int x, y;
-	private int w, h;
-	private int hp;
-	private float tempX, tempY;
+	private int x, y; // 벌레의 좌표
+	private int w, h; // 벌레의 크기
+	private int hp; // 벌레의 hp
+	private int vx, vy;
 
 	private Random random;
 	private boolean isAlive;
+	private boolean isGen;
 
 	private Image img;
 	private static Toolkit tk;
 	static {
 		tk = Toolkit.getDefaultToolkit();
+	}
+
+	public Random getRandom() {
+		return random;
+	}
+
+	public boolean isGen() {
+		return isGen;
 	}
 
 	public void setAlive(boolean isAlive) {
@@ -63,22 +72,15 @@ public class Bug {
 
 	public Bug() {
 		random = new Random();
-		x = random.nextInt(800);
-		y = -20;
-		w = h = 13;
-		tempX = x;
-		tempY = y;
-		setHp(1);
-		img = tk.createImage("res/bullet.png");
-		isAlive = true;
-	}
+		x = random.nextInt(900);
+		y = -80;
+		w = 40;
+		h = 35;
 
-	public Bug(int x, int y) {
-		this();
-		this.x = x;
-		this.y = y;
-		tempX = x;
-		tempY = y;
+		setHp(1);
+		img = tk.createImage("res/mogiDark.png");
+		isAlive = true;
+		isGen = false;
 	}
 
 	public void draw(Graphics g, GameCanvas gamecanvas) {
@@ -87,31 +89,22 @@ public class Bug {
 	}
 
 	public void move() {
-		// v(dx,dy)
-		// 침대 중앙 : 114,690
-		// 침대 왼쪽 아래 : 30,804
-		// +,-
-		float dx = (x - 30);
-		float dy = (y - 804);
-		// 벡터의 길이.
+		// 벡터를 구하기
+		float dx = x - 30;
+		float dy = y - 804;
 		float dis = (float) Math.sqrt(dx * dx + dy * dy);
 
-		// 정규화 = 단위벡터 생성.
-		tempX = dx / dis * random.nextFloat() * 17;
-		tempY = dy / dis * random.nextFloat() * 17;
+		vx = (int) (dx / dis * random.nextFloat() * 7);
+		vy = (int) (dy / dis * random.nextFloat() * 7);
 
-		x += (int) tempX * (-1);
-		y += (int) tempY * (-1);
-		
-		/*
-		 * 벌레의 움직임이 좀 더 커야할것 같다.
-		 * 벌레가 하나씩 출현하게 
-		 * */
+		// 벌레의 위치 업데이트
+		x += vx * (-1);
+		y += vy * (-1);
 	}
 
 	public void die() {
-		tempX = 0;
-		tempY = 0;
+		vx = 0;
+		vy = 0;
 		isAlive = false;
 		img = tk.getImage("res/missile.png");
 	}
@@ -122,7 +115,9 @@ public class Bug {
 			return true;
 		else
 			return false;
-
 	}
 
+	public void gen() {
+			isGen = true;
+	}
 }
