@@ -83,7 +83,7 @@ public class Bug {
 		isGen = false;
 	}
 
-	public void draw(Graphics g, GameCanvas gamecanvas) {
+	public void draw(Graphics g, PlayCanvas gamecanvas) {
 //		g.drawImage(img, x, y, x + w, y + h, x, y, x + w, y + h, gamecanvas);
 		g.drawImage(img, x, y, gamecanvas);
 	}

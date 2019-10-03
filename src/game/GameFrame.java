@@ -6,15 +6,24 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class GameFrame extends Frame {
-	Canvas gamecanvas;
+	Canvas canvas;
+
+	public static GameFrame frame;
+
+	public static GameFrame getInstance() {
+		if (frame != null) {
+			return frame;
+		}
+		frame = new GameFrame();
+		return frame;
+	}
 
 	public GameFrame() {
 		setBounds(0, 0, 850, 862);
-
-		gamecanvas = new GameCanvas();
-		add(gamecanvas);
-		gamecanvas.setFocusable(true);
-		gamecanvas.requestFocus();
+		canvas = new PlayCanvas();
+		add(canvas);
+		canvas.setFocusable(true);
+		canvas.requestFocus();
 		setVisible(true);
 
 		addWindowListener(new WindowAdapter() {
@@ -24,6 +33,18 @@ public class GameFrame extends Frame {
 				System.exit(0);
 			}
 		});
-	}
+	}// 생성자 종료
 
+	public void switching(Canvas fromcanvas, Canvas tocanvas) {
+		remove(fromcanvas);
+
+//		gameStart.setVisible(false);
+//		gameMethod.setVisible(false);
+//		gameExit.setVisible(false);
+
+		add(tocanvas);
+		tocanvas.setFocusable(true);
+		tocanvas.requestFocus();
+		revalidate();
+	}
 }

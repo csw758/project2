@@ -33,7 +33,7 @@ public class Hand {
 		img = tk.getImage("res/hand.png");
 	}
 
-	public void draw(Graphics g, GameCanvas gameCanvas) {
+	public void draw(Graphics g, PlayCanvas gameCanvas) {
 		if (pressed)
 			g.drawImage(img, x, y, x + w - 10, y + h - 10, 0, 0, 188, 214, gameCanvas);
 		else

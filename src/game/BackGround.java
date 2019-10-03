@@ -16,8 +16,10 @@ public class BackGround {
 		img = tk.getImage("res/backgroundMap.png");
 	}
 
-	public void draw(Graphics g, GameCanvas gamecanvas) {
+	
+	public void draw(Graphics g, PlayCanvas gamecanvas) {
 		g.drawImage(img, x, y, x + 834, y + 824, x, y, x + 900, y + 879, gamecanvas);
 	}
+
 
 }
