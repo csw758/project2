@@ -43,6 +43,8 @@ public class Hand {
 
 	public void attack(Bug bug) {
 		bug.setHp(bug.getHp() - 1);
+		if (bug.getHp() <= 0)
+			bug.die();
 	}
 
 	public boolean isPressed() {

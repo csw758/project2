@@ -3,7 +3,6 @@ package game;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class Bug {
@@ -84,8 +83,10 @@ public class Bug {
 	}
 
 	public void draw(Graphics g, PlayCanvas gamecanvas) {
-//		g.drawImage(img, x, y, x + w, y + h, x, y, x + w, y + h, gamecanvas);
-		g.drawImage(img, x, y, gamecanvas);
+		if (isAlive)
+			g.drawImage(img, x, y, gamecanvas);
+		else
+			g.drawImage(img, x, y, x + w, y + h, 0, 0, 1023, 752, gamecanvas);
 	}
 
 	public void move() {
@@ -106,7 +107,7 @@ public class Bug {
 		vx = 0;
 		vy = 0;
 		isAlive = false;
-		img = tk.getImage("res/missile.png");
+		img = tk.getImage("res/diemogiBig.png");
 	}
 
 	public boolean contains(int mx, int my) {
@@ -118,6 +119,6 @@ public class Bug {
 	}
 
 	public void gen() {
-			isGen = true;
+		isGen = true;
 	}
 }
