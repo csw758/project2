@@ -30,15 +30,14 @@ public class Hand {
 		h = 35;
 		setMoney(0);
 		weapon = new Weapon();
-		img = tk.getImage("res/hand.png");
+		img = tk.getImage("res/idle.png");
 	}
 
 	public void draw(Graphics g, PlayCanvas gameCanvas) {
 		if (pressed)
-			g.drawImage(img, x, y, x + w - 10, y + h - 10, 0, 0, 188, 214, gameCanvas);
+			g.drawImage(img, x - 20, y - 19, x + w - 10, y + h - 10, 0, 0, 290, 240, gameCanvas);
 		else
-			g.drawImage(img, x, y, x + w, y + h, 0, 0, 188, 214, gameCanvas);
-
+			g.drawImage(img, x - 30, y - 29, x + w, y + h, 0, 0, 290, 240, gameCanvas);
 	}
 
 	public void attack(Bug bug) {

@@ -112,7 +112,7 @@ public class PlayCanvas extends Canvas {
 
 	private void gameClear() {
 		if (countDieBug >= countBug) {
-			gameframe.switchCanvas(new IntroCanvas());
+//			gameframe.switchCanvas(new IntroCanvas());
 		}
 	}
 
@@ -128,6 +128,9 @@ public class PlayCanvas extends Canvas {
 					gentime = 1f;
 				}
 				if (bug.getX() < 261 && bug.getY() > 511) {
+//					gameframe.switchCanvas(new EndingCanvas());
+//					System.out.println("ending");
+					break;
 				}
 			}
 		}

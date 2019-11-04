@@ -22,7 +22,6 @@ public class IntroCanvas extends Canvas {
 				// 사용 하기 전에 불러와야 사용 가능.
 				gameframe = GameFrame.getInstance();
 				gameframe.switchCanvas(new PlayCanvas());
-
 			}
 		});
 	}

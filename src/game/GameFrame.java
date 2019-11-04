@@ -65,11 +65,6 @@ public class GameFrame extends Frame {
 		System.out.println("Switching");
 		remove(canvas);
 		canvas = tocanvas;
-
-//		gameStart.setVisible(false);
-//		gameMethod.setVisible(false);
-//		gameExit.setVisible(false);
-
 		add(canvas);
 		canvas.setFocusable(true);
 		canvas.requestFocus();

@@ -10,6 +10,7 @@ public class Bug {
 	private int w, h; // 벌레의 크기
 	private int hp; // 벌레의 hp
 	private int vx, vy;
+	private int offsetX, offsetY;
 
 	private Random random;
 	private boolean isAlive;
@@ -75,6 +76,8 @@ public class Bug {
 		y = -80;
 		w = 40;
 		h = 35;
+		offsetX = w / 2;
+		offsetY = h / 2;
 
 		setHp(1);
 		img = tk.createImage("res/mogiDark.png");
@@ -84,9 +87,9 @@ public class Bug {
 
 	public void draw(Graphics g, PlayCanvas gamecanvas) {
 		if (isAlive)
-			g.drawImage(img, x, y, gamecanvas);
+			g.drawImage(img, x - offsetX, y - offsetY, gamecanvas);
 		else
-			g.drawImage(img, x, y, x + w, y + h, 0, 0, 1023, 752, gamecanvas);
+			g.drawImage(img, x - offsetX, y - offsetY, x - offsetX + w, y - offsetY + h, 0, 0, 1023, 752, gamecanvas);
 	}
 
 	public void move() {
@@ -111,9 +114,17 @@ public class Bug {
 	}
 
 	public boolean contains(int mx, int my) {
-		if (x <= mx && mx <= x + w /**/
-				&& y <= my && my <= y + h)
-			return true;
+		// mx : 현재 마우스 x 위치
+		// mx-5, mx+5는 파리채 범위
+		//
+//		if ((x - offsetX <= mx-5 && mx-5 <= x + offsetX /**/
+//				|| (x - offsetX <= mx+5 && mx+5 <= x + offsetX) )/**/
+//				&& ((y - offsetY <= my+5 && my+5 <= y + offsetY)/**/
+//				|| (y - offsetY <= my+5 && my+5 <= y + offsetY)))
+		int dis = (int) Math.round(Math.sqrt((x - mx) * (x - mx) + (y - my) * (y - my)));
+		if (dis <= 15) {
+			return true;			
+		}
 		else
 			return false;
 	}
